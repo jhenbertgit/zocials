@@ -1,9 +1,22 @@
 import type { CollectionConfig } from 'payload'
 
-export const Media: CollectionConfig = {
+const Media: CollectionConfig = {
   slug: 'media',
   access: {
     read: () => true,
+    create: () => true,
+    update: () => true,
+  },
+  upload: {
+    mimeTypes: [
+      'image/jpeg',
+      'image/png',
+      'image/gif',
+      'image/webp',
+      'video/mp4',
+      'video/webm',
+      'video/quicktime',
+    ],
   },
   fields: [
     {
@@ -11,6 +24,23 @@ export const Media: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    {
+      name: 'type',
+      type: 'select',
+      options: [
+        {
+          label: 'Image',
+          value: 'image',
+        },
+        {
+          label: 'Video',
+          value: 'video',
+        },
+      ],
+      required: true,
+      defaultValue: 'image',
+    },
   ],
-  upload: true,
 }
+
+export default Media
